@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search Visibility & CTR Opportunity Scoring</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:1050px;margin:40px auto;padding:0 20px;line-height:1.65;color:#202124}
+.hero{padding:30px;border:1px solid #ddd;border-radius:16px} table{border-collapse:collapse;width:100%;margin:20px 0}
+th,td{border:1px solid #ddd;padding:9px;text-align:right} th:first-child,td:first-child{text-align:left}
+img{max-width:100%;border:1px solid #ddd;border-radius:10px;margin:10px 0} .note{padding:14px;background:#f5f5f5;border-radius:10px}
+</style></head><body>
+<div class="hero"><h1>Search Visibility & CTR Opportunity Scoring</h1>
+<p><strong>FlyRank ML Internship Capstone — CTR / Engagement Opportunity Scoring</strong></p>
+<p>A reproducible decision-support model for prioritizing content records with meaningful search visibility and comparatively low CTR.</p></div>
+<h2>Abstract</h2>
+<p>This study asks which content records can be prioritized for review when they combine meaningful search visibility with comparatively low click-through rate (CTR). Using the FlyRank anonymized dataset, the analysis defines an opportunity profile from the 75th percentile of 90-day impressions and the median non-zero CTR, then evaluates a leakage-aware classification pipeline. A grouped 80/20 train-test split by client was used, with Logistic Regression and Random Forest compared against a majority-class baseline. Logistic Regression achieved an F1 score of <strong>0.687</strong> and ROC-AUC of <strong>0.967</strong>. The resulting score is intended as decision support, not as proof of causality or a guarantee of improved Google performance.</p>
+<h2>1. Introduction / Problem Statement</h2>
+<p>Which content records show a combination of high visibility and relatively low CTR, and can a reproducible machine-learning scoring approach prioritize those records for review?</p>
+<h2>2. Data</h2><ul><li>Rows: 30,000</li><li>Columns: 53</li><li>Client groups: 32</li><li>Impressions 75th percentile: 3,615.25</li><li>Median non-zero CTR: 0.25</li></ul>
+<h2>3. Methodology</h2><p>The opportunity label combines high 90-day impressions with comparatively low non-zero CTR. Existing outcome flags and direct target variables were excluded from model features. Validation uses an 80/20 grouped split by client.</p>
+<h2>4. Results</h2>
+<table><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th></tr>
+<tr><td>Majority baseline</td><td>0.891</td><td>0.000</td><td>0.000</td><td>0.000</td><td>N/A</td></tr>
+<tr><td>Logistic Regression</td><td>0.902</td><td>0.526</td><td>0.991</td><td>0.687</td><td>0.967</td></tr>
+<tr><td>Random Forest</td><td>0.893</td><td>0.504</td><td>0.997</td><td>0.670</td><td>0.950</td></tr></table>
+<img src="model_comparison.png"><img src="ctr_distribution.png">
+<h2>5. Ranked Recommendations</h2><ol><li>Review title/snippet messaging for low-CTR pages with strong positions.</li><li>Review search-intent alignment for highly visible pages with weak CTR.</li><li>Prioritize high-visibility records for content and metadata review.</li><li>Use the score as a review queue and monitor future performance.</li></ol>
+<h2>6. Limitations & Honest Framing</h2><div class="note">This analysis is observational. It does not prove Google's ranking algorithm, establish causality, or guarantee traffic or CTR improvement. Scores are decision-support priorities rather than guaranteed forecasts.</div>
+<h2>7. Reproducibility</h2><p>The complete notebook is included under <code>work/capstone_ctr_opportunity.ipynb</code>.</p>
+<h2>8. Acknowledgments & Data Credit</h2><p>Built on the FlyRank ML Internship dataset.</p>
+</body></html>
